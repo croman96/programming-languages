@@ -1,3 +1,10 @@
+/*
+
+    Carlos Roman Rivera - A01700820
+    Programming Languages - Lab 8
+
+*/
+
 import java.util.Random;
 
 public class Person implements Runnable {
@@ -11,9 +18,11 @@ public class Person implements Runnable {
 
     public void run() {
         Random random = new Random();
+        int sleepTime;
         try {
-            Thread.sleep(random.nextInt(5000) + 5000);
-            garden.leaveGarden(this.name);
+            sleepTime = random.nextInt(5000) + 5000;         // Time to spend inside the garden.
+            Thread.sleep(sleepTime);                                // Spend time doing cool stuff.
+            garden.leaveGarden(this.name);                          // Ask to leave.
         } catch (InterruptedException e) { }
     }
 }
