@@ -52,7 +52,7 @@ public class Main extends RecursiveAction {
         long elapsedTime;
 
         int operation;
-        int end = 50;
+        int end = 10000;
 
         int [][] mA = new int [end][end];
         int [][] mB = new int [end][end];
@@ -86,11 +86,27 @@ public class Main extends RecursiveAction {
 
         operation = s.nextInt();
 
+        // Sequential
+
+        startTime = System.currentTimeMillis();
+
+        for(int i = 0; i < end ; i++) {
+            for(int j = 0 ; j < end ; j++) {
+                mR[i][j] = mA[i][j] + mB[i][j];
+            }
+        }
+
+        endTime = System.currentTimeMillis();
+
+        elapsedTime = endTime - startTime;
+
+        System.out.printf("Sequential finished execution after %d seconds.\n", elapsedTime);
+
+        // Concurrent
+
         Main m = new Main(mA, mB, mR,0, end, operation);
 
         ForkJoinPool pool = new ForkJoinPool();
-
-        System.out.println("Start execution.");
 
         startTime = System.currentTimeMillis();
 
@@ -100,7 +116,7 @@ public class Main extends RecursiveAction {
 
         elapsedTime = endTime - startTime;
 
-        System.out.printf("Finished execution after %d seconds.\n", elapsedTime);
+        System.out.printf("Concurrent finished execution after %d seconds.\n", elapsedTime);
 
     }
 
