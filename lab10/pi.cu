@@ -43,7 +43,7 @@ int main() {
 
   cudaMemcpy(d_pi, pi, size, cudaMemcpyHostToDevice);   // Host to device.
 
-  gpuPi<<<BLOCKS/THREADS_PER_BLOCK, THREADS_PER_BLOCK>>>(d_pi, width, RECTANGLES);
+  gpuPi<<<BLOCKS, THREADS_PER_BLOCK>>>(d_pi, width, RECTANGLES);
 
   cudaMemcpy(pi, d_pi, size, cudaMemcpyDeviceToHost);   // Device to host.
 
